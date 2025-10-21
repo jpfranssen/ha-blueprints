@@ -187,9 +187,9 @@ action:
           - variables:
               mode: >
                 {% set m = trigger.event.data.params.move_mode | default("") %}
-                {% if m in [0, "Up", "MoveMode.Up"] %}
+                {% if m in ["0", "Up", "MoveMode.Up"] %}
                   "Up"
-                {% elif m in [1, "Down", "MoveMode.Down"] %}
+                {% elif m in ["1", "Down", "MoveMode.Down"] %}
                   "Down"
                 {% else %}
                   m
