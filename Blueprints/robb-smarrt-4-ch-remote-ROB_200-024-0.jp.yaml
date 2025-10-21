@@ -14,7 +14,7 @@ blueprint:
 
   domain: automation
   author: Bart Eversdijk
-  source_url: https://github.com/jpfranssen/ha-blueprints/blob/main/robb-smarrt-4-ch-remote-ROB_200-024-0.jp.yaml
+  source_url: https://github.com/jpfranssen/ha-blueprints/blob/main/Blueprints/robb-smarrt-4-ch-remote-ROB_200-024-0.jp.yaml
 
   input:
     remote:
