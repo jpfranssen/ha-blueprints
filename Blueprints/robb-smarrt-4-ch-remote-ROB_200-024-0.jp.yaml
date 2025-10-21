@@ -14,7 +14,7 @@ blueprint:
 
   domain: automation
   author: Bart Eversdijk
-  source_url: https://github.com/jpfranssen/ha-blueprints/blob/main/Blueprints/robb-smarrt-4-ch-remote-ROB_200-024-0.jp.yaml
+  source_url: https://github.com/jpfranssen/ha-blueprints/blob/develop/Blueprints/robb-smarrt-4-ch-remote-ROB_200-024-0.jp.yaml
 
   input:
     remote:
@@ -176,7 +176,7 @@ action:
           "event": event_count
         } | to_json | string }}
 
-  - choose:
+    - choose:
       # ALL
       - conditions: '{{ is_all_command and cmd == "on" }}'
         sequence: !input on_button_all_short
@@ -185,19 +185,11 @@ action:
       - conditions: '{{ is_all_command and cmd in ["move_with_on_off", "move"] }}'
         sequence:
           - variables:
-              mode: >
-                {% set m = trigger.event.data.params.move_mode | default("") %}
-                {% if m in ["0", "Up", "MoveMode.Up"] %}
-                  "Up"
-                {% elif m in ["1", "Down", "MoveMode.Down"] %}
-                  "Down"
-                {% else %}
-                  m
-                {% endif %}
+              mode: '{{ trigger.event.data.params.move_mode | default("") }}'
           - choose:
-              - conditions: '{{ mode == "Up" }}'
+              - conditions: '{{ mode == "MoveMode.Up" }}'
                 sequence: !input on_button_all_long
-              - conditions: '{{ mode == "Down" }}'
+              - conditions: '{{ mode == "MoveMode.Down" }}'
                 sequence: !input off_button_all_long
 
       # BUTTON 1
