@@ -30,48 +30,132 @@ blueprint:
         entity:
           domain: input_text
 
-    # Buttons
+    # Button inputs
     on_button_all_short:
       name: On button All - short
       default: []
-      selector: {action: {}}
+      selector:
+        action: {}
     off_button_all_short:
       name: Off button All - short
       default: []
-      selector: {action: {}}
+      selector:
+        action: {}
     on_button_all_long:
       name: On button All - long press
       default: []
-      selector: {action: {}}
+      selector:
+        action: {}
     off_button_all_long:
       name: Off button All - long press
       default: []
-      selector: {action: {}}
+      selector:
+        action: {}
 
-    on_button_1_short:  {name: On button 1 - short,  default: [], selector: {action: {}}}
-    off_button_1_short: {name: Off button 1 - short, default: [], selector: {action: {}}}
-    on_button_1_long:   {name: On button 1 - long,   default: [], selector: {action: {}}}
-    off_button_1_long:  {name: Off button 1 - long,  default: [], selector: {action: {}}}
+    on_button_1_short:
+      name: On button 1 - short
+      default: []
+      selector:
+        action: {}
+    off_button_1_short:
+      name: Off button 1 - short
+      default: []
+      selector:
+        action: {}
+    on_button_1_long:
+      name: On button 1 - long press
+      default: []
+      selector:
+        action: {}
+    off_button_1_long:
+      name: Off button 1 - long press
+      default: []
+      selector:
+        action: {}
 
-    on_button_2_short:  {name: On button 2 - short,  default: [], selector: {action: {}}}
-    off_button_2_short: {name: Off button 2 - short, default: [], selector: {action: {}}}
-    on_button_2_long:   {name: On button 2 - long,   default: [], selector: {action: {}}}
-    off_button_2_long:  {name: Off button 2 - long,  default: [], selector: {action: {}}}
+    on_button_2_short:
+      name: On button 2 - short
+      default: []
+      selector:
+        action: {}
+    off_button_2_short:
+      name: Off button 2 - short
+      default: []
+      selector:
+        action: {}
+    on_button_2_long:
+      name: On button 2 - long press
+      default: []
+      selector:
+        action: {}
+    off_button_2_long:
+      name: Off button 2 - long press
+      default: []
+      selector:
+        action: {}
 
-    on_button_3_short:  {name: On button 3 - short,  default: [], selector: {action: {}}}
-    off_button_3_short: {name: Off button 3 - short, default: [], selector: {action: {}}}
-    on_button_3_long:   {name: On button 3 - long,   default: [], selector: {action: {}}}
-    off_button_3_long:  {name: Off button 3 - long,  default: [], selector: {action: {}}}
+    on_button_3_short:
+      name: On button 3 - short
+      default: []
+      selector:
+        action: {}
+    off_button_3_short:
+      name: Off button 3 - short
+      default: []
+      selector:
+        action: {}
+    on_button_3_long:
+      name: On button 3 - long press
+      default: []
+      selector:
+        action: {}
+    off_button_3_long:
+      name: Off button 3 - long press
+      default: []
+      selector:
+        action: {}
 
-    on_button_4_short:  {name: On button 4 - short,  default: [], selector: {action: {}}}
-    off_button_4_short: {name: Off button 4 - short, default: [], selector: {action: {}}}
-    on_button_4_long:   {name: On button 4 - long,   default: [], selector: {action: {}}}
-    off_button_4_long:  {name: Off button 4 - long,  default: [], selector: {action: {}}}
+    on_button_4_short:
+      name: On button 4 - short
+      default: []
+      selector:
+        action: {}
+    off_button_4_short:
+      name: Off button 4 - short
+      default: []
+      selector:
+        action: {}
+    on_button_4_long:
+      name: On button 4 - long press
+      default: []
+      selector:
+        action: {}
+    off_button_4_long:
+      name: Off button 4 - long press
+      default: []
+      selector:
+        action: {}
 
-    s1_button_short: {name: S1 button - short, default: [], selector: {action: {}}}
-    s2_button_short: {name: S2 button - short, default: [], selector: {action: {}}}
-    s1_button_long:  {name: S1 button - long,  default: [], selector: {action: {}}}
-    s2_button_long:  {name: S2 button - long,  default: [], selector: {action: {}}}
+    s1_button_short:
+      name: S1 button - short
+      default: []
+      selector:
+        action: {}
+    s2_button_short:
+      name: S2 button - short
+      default: []
+      selector:
+        action: {}
+    s1_button_long:
+      name: S1 button - long press
+      default: []
+      selector:
+        action: {}
+    s2_button_long:
+      name: S2 button - long press
+      default: []
+      selector:
+        action: {}
 
 mode: parallel
 max_exceeded: silent
@@ -114,7 +198,7 @@ action:
         {{ {"timestamp": now, "endpoint_id": button, "event": event_count} | to_json | string }}
 
   - choose:
-      # ALL
+      # ALL buttons
       - conditions: '{{ is_all_command and cmd == "on" }}'
         sequence: !input on_button_all_short
       - conditions: '{{ is_all_command and cmd == "off" }}'
@@ -189,7 +273,7 @@ action:
               - conditions: '{{ mode == "MoveMode.Down" }}'
                 sequence: !input off_button_4_long
 
-      # S1/S2
+      # S1 / S2
       - conditions: '{{ not is_double_event and not is_all_command and button == 1 and cmd == "recall" }}'
         sequence:
           - variables:
